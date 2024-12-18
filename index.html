@@ -155,11 +155,27 @@ h1 {
 </div>
 
 <script>
+// For GitHub Pages and Vercel deployment, we need to handle the base path
 function getDestinationUrl() {
-    // Get the path from the URL (everything after the domain)
-    const path = window.location.pathname;
-    // Remove the leading slash
-    return path.substring(1);
+    // Get the full path from the URL
+    let path = window.location.pathname;
+    
+    // Remove the base path if it exists (for GitHub Pages)
+    const basePath = document.querySelector('base').getAttribute('href');
+    if (basePath && basePath !== '/') {
+        path = path.replace(basePath, '');
+    }
+    
+    // Remove any leading slashes
+    path = path.replace(/^\/+/, '');
+    
+    // If the path contains multiple segments (like repo-name/actual-url)
+    const pathSegments = path.split('/');
+    if (pathSegments.length > 1) {
+        path = pathSegments.slice(1).join('/');
+    }
+    
+    return decodeURIComponent(path);
 }
 
 function validateUrl(url) {
@@ -167,7 +183,6 @@ function validateUrl(url) {
         new URL(url);
         return true;
     } catch {
-        // If the URL doesn't include protocol, try adding https://
         try {
             new URL('https://' + url);
             return 'https://' + url;
@@ -218,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.theme-toggle .material-icons').textContent = 'light_mode';
     }
     
-    // If no destination URL is provided, show an error
     if (!destinationUrl) {
         document.querySelector('.card').innerHTML = `
             <div class="icon-container">
