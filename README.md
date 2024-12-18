@@ -10,13 +10,36 @@
 
 - **Redirect Confirmation**: Add the desired path after the base URL to see how your redirects perform.
 - **Custom 404 Page**: Utilizes a custom `404.html` page to make redirect testing pages functional and intuitive.
-- **Lightweight and Fast**: Built for efficiency and speed, hosted on Vercel for seamless performance.
+- **Dark Mode Toggle**: Seamlessly switch between light and dark themes for an improved user experience.
+- **Validation of Destination URL**: Ensures the provided URL is valid before redirecting.
+- **Responsive Design**: Adapts to different screen sizes for accessibility on various devices.
 
 ## How It Works
 
 1. Visit the website at [redirect-confirmer.vercel.app](https://redirect-confirmer.vercel.app/).
 2. Append the intended redirect path to the URL (e.g., `https://redirect-confirmer.vercel.app/example-path`).
 3. The website processes and confirms the redirect behavior based on the appended path.
+4. The displayed card allows users to:
+   - Confirm and continue to the destination URL.
+   - Go back to the previous page.
+
+### Technical Details
+
+- **Frontend**:
+  - Built with HTML, CSS, and JavaScript.
+  - Utilizes Material Icons and Roboto font for a clean and modern interface.
+- **Custom Theme Management**:
+  - Light and dark themes are toggleable and persist via `localStorage`.
+- **Error Handling**:
+  - Displays a friendly message if no URL is provided or if the URL is invalid.
+- **URL Validation**:
+  - Ensures that the appended path is a valid URL before attempting to redirect.
+
+### Key Components
+
+- **Main Card**: A central UI element that displays the confirmation prompt.
+- **Dynamic URL Handling**: Extracts and validates the destination URL from the appended path.
+- **Theme Toggle Button**: A fixed-position button that allows users to switch between themes.
 
 ## Usage Scenarios
 
